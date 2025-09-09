@@ -1,14 +1,71 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
 
-Televisao tv = new Televisao(55f);
-Console.WriteLine($"A tv tem o tamanho {tv.Tamanho}");
+public class Televisao
+{
+    private int totalCanais = 520;
+    private int canalAtual = 1;
+    private int ultimoCanal = 1;
+    private int volumeAtual = 50;
+    private int volumeMax = 100;
+    private int volumeMin = 0;
+    private bool mudo = false;
 
-tv.Volume = -35;
-Console.WriteLine($"Volume {tv.Volume}");
+    // ----- GERENCIAMENTO DE CANAIS -----
+    public void LigarTV()
+    {
+        canalAtual = ultimoCanal;
+        Console.WriteLine($"A TV ligou no canal {canalAtual}");
+    }
 
-tv.Volume = 120;
-Console.WriteLine($"Volume {tv.Volume}");
+    public void PassarCanalAcima()
+    {
+        if (canalAtual < totalCanais)
+            canalAtual++;
+        Console.WriteLine($"Canal atual: {canalAtual}");
+    }
 
-tv.AumentarVolume();
-Console.WriteLine($"Volume {tv.Volume}");
+    public void PassarCanalAbaixo()
+    {
+        if (canalAtual > 1)
+            canalAtual--;
+        Console.WriteLine($"Canal atual: {canalAtual}");
+    }
+
+    public void IrParaCanal(int numero)
+    {
+        if (numero >= 1 && numero <= totalCanais)
+        {
+            canalAtual = numero;
+            ultimoCanal = numero;
+        }
+        else
+        {
+            Console.WriteLine("Canal inválido!");
+        }
+        Console.WriteLine($"Canal atual: {canalAtual}");
+    }
+
+    // ----- GERENCIAMENTO DE VOLUME -----
+    public void AumentarVolume()
+    {
+        if (volumeAtual < volumeMax)
+            volumeAtual++;
+        Console.WriteLine($"Volume atual: {volumeAtual}");
+    }
+
+    public void ReduzirVolume()
+    {
+        if (volumeAtual > volumeMin)
+            volumeAtual--;
+        Console.WriteLine($"Volume atual: {volumeAtual}");
+    }
+
+    public void AtivarMudo()
+    {
+        mudo = !mudo;
+        if (mudo)
+            Console.WriteLine("TV no modo mudo");
+        else
+            Console.WriteLine($"Mudo desativado. Volume: {volumeAtual}");
+    }
+}

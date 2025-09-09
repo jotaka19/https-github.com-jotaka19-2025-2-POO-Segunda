@@ -1,22 +1,23 @@
-public class Televisao
+using System;
+
+class Program
 {
-    private const int VOL_MAX = 100;
-    public Televisao(float tamanho)
+    static void Main(string[] args)
     {
-        Tamanho = tamanho;
-    }
+        Televisao tv = new Televisao();
 
-    public float Tamanho { get; }
-    public int Resolucao { get; set; }
-    public int Volume { get; private set; }
-    public int Canal { get; set; }
-    public bool Estado { get; set; }
+        tv.LigarTV();
 
-    public void AumentarVolume()
-    {
-        if(Volume < VOL_MAX)
-            Volume++;
-        else
-            Console.WriteLine("TV já está no max.");
+        // Testes de canais
+        tv.IrParaCanal(10);
+        tv.PassarCanalAcima();
+        tv.PassarCanalAbaixo();
+        tv.IrParaCanal(600); // inválido
+
+        // Testes de volume
+        tv.AumentarVolume();
+        tv.ReduzirVolume();
+        tv.AtivarMudo();
+        tv.AtivarMudo();
     }
 }
